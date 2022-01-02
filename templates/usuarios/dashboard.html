@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
 <div class="contact-area section-padding-0-80">
     <div class="container">
         <div class="row">
@@ -8,4 +12,35 @@
             </div>
         </div>
     </div>
- </div>
+</div>
+<!-- ##### Best Receipe Area Start ##### -->
+<section class="best-receipe-area">
+    <div class="container">
+        <div class="row">
+            {% if receitas != None %}
+                {% for receita in receitas %}
+                    <!-- Single Best Receipe Area -->
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="single-best-receipe-area mb-30">
+                            {% if receita.foto_receita != '' %}
+                                <img src="{{ receita.foto_receita.url }}" alt="">
+                            {% else %}
+                                <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
+                            {% endif %}
+                            
+                            <div class="receipe-content">
+                                <a href="{% url 'receitas:receita' pk=receita.id %}">
+                                    <h5>{{ receita.nome_receita }}</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!-- ##### Best Receipe Area End ##### -->
+{% endblock %}
