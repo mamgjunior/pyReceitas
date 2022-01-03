@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth, messages
 from receitas.models import Receita
-from .utils import campo_vazio, senhas_nao_sao_iguais
+from usuarios.utils import campo_vazio, senhas_nao_sao_iguais
 
 def dashboard(request, template_name='usuarios/dashboard.html'):
     if request.user.is_authenticated:
@@ -73,22 +73,5 @@ def cadastro(request, template_name='usuarios/cadastro.html'):
 
         messages.success(request, 'Usuário cadastrado com sucesso')
         return redirect('usuarios:login')
-    else:
-        return render(request, template_name)
-
-
-def criar_receita(request, template_name='usuarios/criar_receita.html'):
-    if request.method == 'POST':
-        user = get_object_or_404(User, pk=request.user.id)
-        receita = Receita(pessoa=user, 
-            nome_receita=request.POST['nome_receita'],
-            ingredientes=request.POST['ingredientes'],
-            modo_preparo=request.POST['modo_preparo'],
-            tempo_preparo=request.POST['tempo_preparo'],
-            rendimento=request.POST['rendimento'],
-            categoria=request.POST['categoria'],
-            foto_receita=request.FILES['foto_receita'])
-        receita.save()
-        return redirect('usuarios:dashboard')
     else:
         return render(request, template_name)

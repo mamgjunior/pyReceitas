@@ -56,7 +56,7 @@
                                 {% if user.is_authenticated %}
                                     <li><a href="{% url 'receitas:index' %}">Home</a></li>
                                     <li><a href="{% url 'usuarios:dashboard' %}">Dashboard</a></li>
-                                    <li><a href="{% url 'usuarios:criar_receita' %}">Criar Receita</a></li>
+                                    <li><a href="{% url 'receitas:criar_receita' %}">Criar Receita</a></li>
                                     <li><a href="{% url 'usuarios:logout' %}">Logout</a></li>
                                 {% else %}
                                     <li><a href="{% url 'receitas:index' %}">Home</a></li>
